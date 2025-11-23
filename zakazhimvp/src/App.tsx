@@ -91,7 +91,47 @@ export default function App() {
     setShowCheckoutConfirmation(true);
   };
 
-  const handleConfirmCheckout = () => {
+  const sendOrderToWebhook = async (orderData: {
+    orderNumber: string;
+    items: CartItem[];
+    totalAmount: number;
+    time: string;
+    date: string;
+    restaurantId?: string;
+  }) => {
+    try {
+      const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const webhookUrl = isDevelopment
+        ? 'https://n8n.zakazhi.org/webhook/order'
+        : 'https://n8n.zakazhi.org/webhook/order';
+      
+      console.log('[Order] Отправка заказа на вебхук:', webhookUrl, orderData);
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      console.log('[Order] Response status:', response.status, response.statusText);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[Order] Error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json().catch(() => ({ message: 'Success' }));
+      console.log('[Order] Заказ успешно отправлен:', result);
+    } catch (error) {
+      console.error('[Order] Ошибка при отправке заказа:', error);
+      // Не показываем ошибку пользователю, чтобы не нарушать UX
+    }
+  };
+
+  const handleConfirmCheckout = async () => {
     // Пользователь подтвердил - оформляем заказ
     const randomOrderNumber = Math.floor(1000 + Math.random() * 9000).toString();
     const orderTime = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
@@ -99,17 +139,28 @@ export default function App() {
     const totalAmount = cart.reduce((sum, item) => sum + item.item.price * item.quantity, 0);
     
     // Сохраняем заказ перед очисткой корзины
-    setLastOrder({
+    const orderData = {
       items: [...cart],
       time: orderTime,
       orderNumber: randomOrderNumber
-    });
+    };
     
+    setLastOrder(orderData);
     setOrderNumber(randomOrderNumber);
     setShowCheckoutConfirmation(false);
     setOrderPlaced(true);
     setCart([]);
     toast.success('Заказ успешно оформлен!');
+
+    // Отправляем заказ на вебхук n8n
+    await sendOrderToWebhook({
+      orderNumber: randomOrderNumber,
+      items: orderData.items,
+      totalAmount,
+      time: orderTime,
+      date: orderDate,
+      restaurantId: restaurantId || undefined,
+    });
   };
 
   const handleCancelCheckout = () => {
