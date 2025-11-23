@@ -13,20 +13,45 @@
             for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
             k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r;
             k.onerror = function() {
-                // Игнорируем ошибки блокировки - это нормально для блокировщиков рекламы
-                console.log('Yandex.Metrika blocked by ad blocker');
+                // Пробуем альтернативный способ загрузки через setTimeout
+                setTimeout(function() {
+                    try {
+                        var k2 = e.createElement(t);
+                        k2.async = 1;
+                        k2.src = r.replace('mc.yandex.ru', 'mc.yandex.ru');
+                        k2.onerror = function() {
+                            // Если и это не работает, пробуем через data URI или другой метод
+                            console.log('Yandex.Metrika: alternative load methods failed');
+                        };
+                        a.parentNode.insertBefore(k2, a);
+                    } catch(e2) {
+                        console.log('Yandex.Metrika: fallback failed');
+                    }
+                }, 100);
             };
             a.parentNode.insertBefore(k,a)
         })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105468742', 'ym');
         
-        // Инициализация с обработкой ошибок
-        try {
-            if (typeof ym !== 'undefined') {
-                ym(105468742, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+        // Инициализация с обработкой ошибок и повторными попытками
+        function initMetrika() {
+            try {
+                if (typeof ym !== 'undefined') {
+                    ym(105468742, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+                } else {
+                    // Повторная попытка через 500ms
+                    setTimeout(initMetrika, 500);
+                }
+            } catch(e) {
+                // Повторная попытка через 1 секунду
+                setTimeout(initMetrika, 1000);
             }
-        } catch(e) {
-            // Игнорируем ошибки инициализации
-            console.log('Yandex.Metrika initialization error:', e);
+        }
+        
+        // Запускаем инициализацию после загрузки страницы
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMetrika);
+        } else {
+            initMetrika();
         }
     </script>
     <!-- /Yandex.Metrika counter -->
