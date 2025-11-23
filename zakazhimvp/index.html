@@ -11,9 +11,23 @@
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
             m[i].l=1*new Date();
             for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r;
+            k.onerror = function() {
+                // Игнорируем ошибки блокировки - это нормально для блокировщиков рекламы
+                console.log('Yandex.Metrika blocked by ad blocker');
+            };
+            a.parentNode.insertBefore(k,a)
         })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105468742', 'ym');
-        ym(105468742, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+        
+        // Инициализация с обработкой ошибок
+        try {
+            if (typeof ym !== 'undefined') {
+                ym(105468742, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+            }
+        } catch(e) {
+            // Игнорируем ошибки инициализации
+            console.log('Yandex.Metrika initialization error:', e);
+        }
     </script>
     <!-- /Yandex.Metrika counter -->
     
