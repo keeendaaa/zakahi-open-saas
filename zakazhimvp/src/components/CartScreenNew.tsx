@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartItem, MenuItem } from '../types';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuItem, CartItem } from './types';
 import { restaurantMenu } from './data/restaurant-menu';
 import CollectionsScreenNew from './components/CollectionsScreenNew';
@@ -11,7 +11,7 @@ import CheckoutConfirmation from './components/CheckoutConfirmation';
 import BottomNavRestaurant from './components/BottomNavRestaurant';
 import CallWaiterButton from './components/CallWaiterButton';
 import { Toaster } from './components/ui/sonner';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export default function App() {
   const [activeView, setActiveView] = useState<string>('collections');
