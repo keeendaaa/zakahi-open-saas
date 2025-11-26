@@ -189,7 +189,7 @@ export default function App() {
       setActiveView('cart');
     } else {
       // Возвращаемся в меню
-      setActiveView('collections');
+    setActiveView('collections');
     }
   };
 
@@ -219,11 +219,11 @@ export default function App() {
   if (orderPlaced) {
     return (
       <>
-        <OrderConfirmationNew
-          orderNumber={orderNumber}
-          onBackToMenu={handleBackToMenu}
+      <OrderConfirmationNew
+        orderNumber={orderNumber}
+        onBackToMenu={handleBackToMenu}
           onPayment={handlePayment}
-        />
+      />
         <Toaster position="top-center" richColors />
       </>
     );

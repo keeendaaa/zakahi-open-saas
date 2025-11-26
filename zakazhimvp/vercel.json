@@ -3,12 +3,12 @@
   "outputDirectory": "build",
   "rewrites": [
     {
-      "source": "/restaurant/:id",
-      "destination": "/index.html"
+      "source": "/mvp/restaurant/:id",
+      "destination": "/mvp/index.html"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/mvp/(.*)",
+      "destination": "/mvp/index.html"
     }
   ]
 }

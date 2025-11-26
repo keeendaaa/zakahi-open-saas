@@ -1,6 +1,6 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
+  import { createRoot } from "react-dom/client";
+  import App from "./App.tsx";
+  import "./index.css";
 
 // Скрываем экран загрузки после монтирования приложения
 const hideLoadingScreen = () => {
@@ -20,3 +20,4 @@ root.render(<App />);
 
 // Скрываем экран загрузки после небольшой задержки для плавности
 setTimeout(hideLoadingScreen, 300);
+  

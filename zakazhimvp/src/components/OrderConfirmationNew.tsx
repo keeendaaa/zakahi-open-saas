@@ -64,12 +64,12 @@ export default function OrderConfirmationNew({
         {/* Actions */}
         <div className="space-y-3">
           {onPayment && (
-            <Button
+          <Button
               onClick={onPayment}
-              className="w-full h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
-            >
+            className="w-full h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
+          >
               Оплатить
-            </Button>
+          </Button>
           )}
           
           <Button

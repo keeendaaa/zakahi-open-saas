@@ -160,7 +160,7 @@ export default function CartScreenNew({
               transition={{ duration: 0.4, delay: lastOrder ? 0.3 : 0.1, type: "spring", stiffness: 200 }}
               className="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center"
             >
-              <ShoppingBag className="w-10 h-10 text-gray-400" />
+            <ShoppingBag className="w-10 h-10 text-gray-400" />
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 10 }}
@@ -276,7 +276,7 @@ export default function CartScreenNew({
                     );
                   })}
                 </div>
-                </div>
+          </div>
               </motion.div>
             </motion.div>
           )}
@@ -305,9 +305,9 @@ export default function CartScreenNew({
           <h1>Мой заказ</h1>
         </div>
         {cartItems.length > 0 && (
-          <p className="text-gray-500">
-            {cartItems.length} {cartItems.length === 1 ? 'позиция' : 'позиций'}
-          </p>
+        <p className="text-gray-500">
+          {cartItems.length} {cartItems.length === 1 ? 'позиция' : 'позиций'}
+        </p>
         )}
       </div>
 
@@ -396,30 +396,30 @@ export default function CartScreenNew({
       {/* Текущая корзина */}
       {cartItems.length > 0 && (
         <>
-          {/* Cart Items */}
-          <div className="px-4 space-y-3">
+      {/* Cart Items */}
+      <div className="px-4 space-y-3">
             {cartItems.map((item, index) => (
-              <div
+          <div
                 key={`${item.item.id}-${index}`}
-                className="bg-white rounded-2xl p-4 shadow-sm"
-              >
-                <div className="flex gap-4">
-                  <ImageWithFallback
-                    src={item.item.image}
-                    alt={item.item.name}
-                    className="w-20 h-20 object-cover rounded-xl flex-shrink-0"
-                  />
+            className="bg-white rounded-2xl p-4 shadow-sm"
+          >
+            <div className="flex gap-4">
+              <ImageWithFallback
+                src={item.item.image}
+                alt={item.item.name}
+                className="w-20 h-20 object-cover rounded-xl flex-shrink-0"
+              />
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-sm line-clamp-2 pr-2">{item.item.name}</h3>
-                      <button
-                        onClick={() => onRemoveItem(item.item.id)}
-                        className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="text-sm line-clamp-2 pr-2">{item.item.name}</h3>
+                  <button
+                    onClick={() => onRemoveItem(item.item.id)}
+                    className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
 
                     {/* Убранные ингредиенты */}
                     {item.removedIngredients && item.removedIngredients.length > 0 && (
@@ -428,53 +428,53 @@ export default function CartScreenNew({
                       </div>
                     )}
 
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">
-                        {item.item.price * item.quantity} ₽
-                      </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">
+                    {item.item.price * item.quantity} ₽
+                  </span>
 
-                      <div className="flex items-center gap-3 bg-gray-50 rounded-full px-3 py-1.5">
-                        <button
-                          onClick={() => onUpdateQuantity(item.item.id, item.quantity - 1)}
-                          className="text-gray-600 hover:text-gray-900 transition-colors"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="text-sm w-4 text-center">{item.quantity}</span>
-                        <button
-                          onClick={() => onUpdateQuantity(item.item.id, item.quantity + 1)}
-                          className="text-gray-600 hover:text-gray-900 transition-colors"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-3 bg-gray-50 rounded-full px-3 py-1.5">
+                    <button
+                      onClick={() => onUpdateQuantity(item.item.id, item.quantity - 1)}
+                      className="text-gray-600 hover:text-gray-900 transition-colors"
+                    >
+                      <Minus className="w-4 h-4" />
+                    </button>
+                    <span className="text-sm w-4 text-center">{item.quantity}</span>
+                    <button
+                      onClick={() => onUpdateQuantity(item.item.id, item.quantity + 1)}
+                      className="text-gray-600 hover:text-gray-900 transition-colors"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Checkout Footer */}
-          <div className="fixed bottom-20 left-0 right-0 bg-white border-t border-gray-100 px-4 py-4 shadow-lg">
-            <div className="mb-4 space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">сумма</span>
-                <span>{totalAmount} ₽</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">сервисный сбор</span>
-                <span>0 ₽</span>
-              </div>
             </div>
-
-            <Button
-              onClick={onCheckout}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 rounded-full"
-            >
-              заказать {totalAmount} ₽
-            </Button>
           </div>
+        ))}
+      </div>
+
+      {/* Checkout Footer */}
+      <div className="fixed bottom-20 left-0 right-0 bg-white border-t border-gray-100 px-4 py-4 shadow-lg">
+        <div className="mb-4 space-y-2">
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-gray-600">сумма</span>
+            <span>{totalAmount} ₽</span>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-gray-600">сервисный сбор</span>
+            <span>0 ₽</span>
+          </div>
+        </div>
+
+        <Button
+          onClick={onCheckout}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 rounded-full"
+        >
+              заказать {totalAmount} ₽
+        </Button>
+      </div>
         </>
       )}
     </div>
