@@ -38,7 +38,7 @@ export default function PaymentScreen({
       const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       const webhookUrl = isDevelopment
         ? '/api/n8n/webhook/8137396c-eeb6-4df3-b35b-9eb775d8147d'
-        : 'https://n8n.zakazhi.org/webhook/8137396c-eeb6-4df3-b35b-9eb775d8147d';
+        : 'https://n8n.zakazhi.online/webhook/8137396c-eeb6-4df3-b35b-9eb775d8147d';
       console.log('[Feedback] Webhook URL:', webhookUrl);
 
       const response = await fetch(webhookUrl, {

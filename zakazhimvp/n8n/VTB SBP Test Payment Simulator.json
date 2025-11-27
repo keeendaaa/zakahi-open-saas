@@ -66,7 +66,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://n8n.zakazhi.org/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c",
+        "url": "https://n8n.zakazhi.online/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [

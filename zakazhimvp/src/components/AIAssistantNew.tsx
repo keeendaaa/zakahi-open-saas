@@ -21,7 +21,7 @@ const getN8NWebhookUrl = () => {
   const isDevelopment = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
   return isDevelopment
     ? '/api/n8n/webhook/939aba8e-36b3-4011-ac35-13fc37dc9712'
-    : 'https://n8n.zakazhi.org/webhook/939aba8e-36b3-4011-ac35-13fc37dc9712';
+    : 'https://n8n.zakazhi.online/webhook/939aba8e-36b3-4011-ac35-13fc37dc9712';
 };
 
 export default function AIAssistantNew({ menuItems, onAddToCart }: AIAssistantNewProps) {

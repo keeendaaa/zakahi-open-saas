@@ -59,7 +59,7 @@
       open: true,
       proxy: {
         '/api/n8n': {
-          target: 'https://n8n.zakazhi.org',
+          target: 'https://n8n.zakazhi.online',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/n8n/, ''),
           secure: true,

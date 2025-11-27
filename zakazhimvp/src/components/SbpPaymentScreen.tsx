@@ -39,9 +39,9 @@ export default function SbpPaymentScreen({
   const [status, setStatus] = useState<'loading' | 'ready' | 'paid' | 'expired' | 'rejected'>('loading');
 
   // Webhook URL для создания платежа
-  const paymentWebhookUrl = 'https://n8n.zakazhi.org/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c';
+  const paymentWebhookUrl = 'https://n8n.zakazhi.online/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c';
   // Webhook URL для симуляции платежа (только для тестирования)
-  const simulateWebhookUrl = 'https://n8n.zakazhi.org/webhook/test-payment-simulate';
+  const simulateWebhookUrl = 'https://n8n.zakazhi.online/webhook/test-payment-simulate';
 
   // Создание платежа и получение QR-кода
   useEffect(() => {

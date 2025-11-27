@@ -34,7 +34,7 @@ VTB_PASSWORD=your_production_password
 
 ### 1. VTB SBP Payment QR Code
 
-**Webhook URL**: `https://n8n.zakazhi.org/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c`
+**Webhook URL**: `https://n8n.zakazhi.online/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c`
 
 **Назначение**: Создание QR-кода для оплаты через СБП
 
@@ -86,7 +86,7 @@ VTB_PASSWORD=your_production_password
 
 ### 2. VTB SBP Test Payment Simulator
 
-**Webhook URL**: `https://n8n.zakazhi.org/webhook/test-payment-simulate`
+**Webhook URL**: `https://n8n.zakazhi.online/webhook/test-payment-simulate`
 
 **Назначение**: Симуляция платежа для тестирования (без реальной оплаты)
 
@@ -111,7 +111,7 @@ VTB_PASSWORD=your_production_password
 
 1. **Симуляция успешной оплаты**:
 ```bash
-curl -X POST https://n8n.zakazhi.org/webhook/test-payment-simulate \
+curl -X POST https://n8n.zakazhi.online/webhook/test-payment-simulate \
   -H "Content-Type: application/json" \
   -d '{
     "orderId": "04888d6f-7920-7531-8332-8de901efddd0",
@@ -124,7 +124,7 @@ curl -X POST https://n8n.zakazhi.org/webhook/test-payment-simulate \
 
 2. **Симуляция отклонения платежа**:
 ```bash
-curl -X POST https://n8n.zakazhi.org/webhook/test-payment-simulate \
+curl -X POST https://n8n.zakazhi.online/webhook/test-payment-simulate \
   -H "Content-Type: application/json" \
   -d '{
     "orderId": "04888d6f-7920-7531-8332-8de901efddd0",
@@ -143,7 +143,7 @@ curl -X POST https://n8n.zakazhi.org/webhook/test-payment-simulate \
 // Создание платежа и получение QR-кода
 async function createPayment(orderData: any) {
   const response = await fetch(
-    'https://n8n.zakazhi.org/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c',
+    'https://n8n.zakazhi.online/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c',
     {
       method: 'POST',
       headers: {
@@ -172,7 +172,7 @@ async function createPayment(orderData: any) {
 // Симуляция оплаты (для тестирования)
 async function simulatePayment(orderId: string, qrId: string) {
   const response = await fetch(
-    'https://n8n.zakazhi.org/webhook/test-payment-simulate',
+    'https://n8n.zakazhi.online/webhook/test-payment-simulate',
     {
       method: 'POST',
       headers: {
@@ -196,7 +196,7 @@ async function simulatePayment(orderId: string, qrId: string) {
 ### 1. Создание тестового платежа
 
 ```bash
-curl -X POST https://n8n.zakazhi.org/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c \
+curl -X POST https://n8n.zakazhi.online/webhook-test/0dc3f33a-c461-483f-9849-08a504686f9c \
   -H "Content-Type: application/json" \
   -d '{
     "amount": 10000,
@@ -211,7 +211,7 @@ curl -X POST https://n8n.zakazhi.org/webhook-test/0dc3f33a-c461-483f-9849-08a504
 После получения QR-кода, используйте симулятор для тестирования:
 
 ```bash
-curl -X POST https://n8n.zakazhi.org/webhook/test-payment-simulate \
+curl -X POST https://n8n.zakazhi.online/webhook/test-payment-simulate \
   -H "Content-Type: application/json" \
   -d '{
     "orderId": "полученный_orderId",

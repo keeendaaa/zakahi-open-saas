@@ -102,8 +102,8 @@ export default function App() {
     try {
       const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       const webhookUrl = isDevelopment
-        ? 'https://n8n.zakazhi.org/webhook/order'
-        : 'https://n8n.zakazhi.org/webhook/order';
+        ? 'https://n8n.zakazhi.online/webhook/order'
+        : 'https://n8n.zakazhi.online/webhook/order';
       
       console.log('[Order] Отправка заказа на вебхук:', webhookUrl, orderData);
 
